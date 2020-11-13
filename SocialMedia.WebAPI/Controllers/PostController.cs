@@ -26,6 +26,12 @@ namespace SocialMedia.WebAPI.Controllers
             var posts = postService.GetPosts();
             return Ok(posts);
         }
+        public IHttpActionResult Get(int id)
+        {
+            PostService postService = CreatePostService();
+            var postComments = postService.GetPostComments(id);
+            return Ok(postComments);
+        }
 
         public IHttpActionResult Post(PostCreate post)
         {

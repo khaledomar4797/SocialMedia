@@ -1,6 +1,6 @@
 ﻿using SocialMedia.Data;
-using SocialMedia.Models;
 using SocialMedia.Models.Comment;
+using SocialMedia.Models.Reply;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,62 +9,40 @@ using System.Threading.Tasks;
 
 namespace SocialMedia.Services
 {
-    public class PostService
+    public class CommentService
     {
         private readonly Guid _userId;
 
-        public PostService(Guid userId)
+        public CommentService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreatePost(PostCreate model)
+        public bool CreateComment(CommentCreate model)
         {
             var entity =
-                new Post()
+                new Comment()
                 {
                     AuthorId = _userId,
-                    Title = model.Title,
-                    Text = model.Text
+                    Text = model.Text,
+                    PostId = model.PostId
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Posts.Add(entity);
+                ctx.Comments.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public IEnumerable<PostListItem> GetPosts()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                        .Posts
-                        .Where(e => e.AuthorId == _userId)
-                        .Select(
-                            e =>
-                                new PostListItem
-                                {
-                                    PostId = e.PostId,
-                                    Title = e.Title
-                                }
-                        );
-
-                return query.ToArray();
-            }
-        }
-
-        //Get Post Comments
-        public IEnumerable<CommentListItem> GetPostComments(int postId)
+        public IEnumerable<CommentListItem> GetComments()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                         .Comments
-                        .Where(e => e.AuthorId == _userId && e.PostId == postId)
+                        .Where(e => e.AuthorId == _userId)
                         .Select(
                             e =>
                                 new CommentListItem
@@ -77,5 +55,28 @@ namespace SocialMedia.Services
                 return query.ToArray();
             }
         }
+
+        //Get Comment Replies
+        public IEnumerable<ReplyListItem> GetCommentReplies(int commentId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Replies
+                        .Where(e => e.AuthorId == _userId && e.CommentId == commentId)
+                        .Select(
+                            e =>
+                                new ReplyListItem
+                                {
+                                    ReplyId = e.ReplyId,
+                                    Text = e.Text
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
     }
 }
