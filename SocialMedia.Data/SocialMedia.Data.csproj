@@ -84,12 +84,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comment.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Like.cs" />
+    <Compile Include="Migrations\202011122340293_InitialCreate.cs" />
+    <Compile Include="Migrations\202011122340293_InitialCreate.Designer.cs">
+      <DependentUpon>202011122340293_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011130025082_Added-LikeSection.cs" />
+    <Compile Include="Migrations\202011130025082_Added-LikeSection.Designer.cs">
+      <DependentUpon>202011130025082_Added-LikeSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011131517585_Added-CommentSection.cs" />
+    <Compile Include="Migrations\202011131517585_Added-CommentSection.Designer.cs">
+      <DependentUpon>202011131517585_Added-CommentSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011131559549_Added-ReplySection.cs" />
+    <Compile Include="Migrations\202011131559549_Added-ReplySection.Designer.cs">
+      <DependentUpon>202011131559549_Added-ReplySection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011131756036_Updated-LikeTable.cs" />
+    <Compile Include="Migrations\202011131756036_Updated-LikeTable.Designer.cs">
+      <DependentUpon>202011131756036_Updated-LikeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reply.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011122340293_InitialCreate.resx">
+      <DependentUpon>202011122340293_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011130025082_Added-LikeSection.resx">
+      <DependentUpon>202011130025082_Added-LikeSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131517585_Added-CommentSection.resx">
+      <DependentUpon>202011131517585_Added-CommentSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131559549_Added-ReplySection.resx">
+      <DependentUpon>202011131559549_Added-ReplySection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131756036_Updated-LikeTable.resx">
+      <DependentUpon>202011131756036_Updated-LikeTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

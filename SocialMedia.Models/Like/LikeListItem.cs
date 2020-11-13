@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialMedia.Services
+namespace SocialMedia.Models
 {
-    public class Class1
+    public class LikeListItem
     {
+        public Guid Liker { get; set; }
     }
 }
