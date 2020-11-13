@@ -1,5 +1,6 @@
 ﻿using SocialMedia.Data;
 using SocialMedia.Models;
+using SocialMedia.Models.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,28 @@ namespace SocialMedia.Services
                                 {
                                     PostId = e.PostId,
                                     Title = e.Title
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
+        //Get Post Comments
+        public IEnumerable<CommentListItem> GetPostComments(int postId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Comments
+                        .Where(e => e.AuthorId == _userId && e.PostId == postId)
+                        .Select(
+                            e =>
+                                new CommentListItem
+                                {
+                                    CommentId = e.CommentId,
+                                    Text = e.Text
                                 }
                         );
 

@@ -1,5 +1,4 @@
 ﻿using SocialMedia.Data;
-using SocialMedia.Models.Comment;
 using SocialMedia.Models.Reply;
 using System;
 using System.Collections.Generic;
@@ -9,62 +8,40 @@ using System.Threading.Tasks;
 
 namespace SocialMedia.Services
 {
-    public class CommentService
+    public class ReplyService
     {
         private readonly Guid _userId;
 
-        public CommentService(Guid userId)
+        public ReplyService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreateComment(CommentCreate model)
+        public bool CreateReply(ReplyCreate model)
         {
             var entity =
-                new Comment()
+                new Reply()
                 {
                     AuthorId = _userId,
                     Text = model.Text,
-                    PostId = model.PostId
+                    CommentId = model.CommentId
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Comments.Add(entity);
+                ctx.Replies.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public IEnumerable<CommentListItem> GetComments()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                        .Comments
-                        .Where(e => e.AuthorId == _userId)
-                        .Select(
-                            e =>
-                                new CommentListItem
-                                {
-                                    CommentId = e.CommentId,
-                                    Text = e.Text
-                                }
-                        );
-
-                return query.ToArray();
-            }
-        }
-
-        //Get Comment Replies
-        public IEnumerable<ReplyListItem> GetCommentReplies(int commentId)
+        public IEnumerable<ReplyListItem> GetReplies()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                         .Replies
-                        .Where(e => e.AuthorId == _userId && e.CommentId == commentId)
+                        .Where(e => e.AuthorId == _userId)
                         .Select(
                             e =>
                                 new ReplyListItem
@@ -77,6 +54,5 @@ namespace SocialMedia.Services
                 return query.ToArray();
             }
         }
-
     }
 }

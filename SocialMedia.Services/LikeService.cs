@@ -19,10 +19,14 @@ namespace SocialMedia.Services
 
         public bool CreateLike(LikeCreate model)
         {
+            var postContext = new ApplicationDbContext();
+
+            Post post = postContext.Posts.Find(model.PostId);
+
             var entity = new Like()
             {
                 Liker = _userId,
-                LikePost = model.LikePost
+                LikePost = post
             };
 
             using (var ctx = new ApplicationDbContext())

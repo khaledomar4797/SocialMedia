@@ -21,6 +21,6 @@ namespace SocialMedia.Data
         [Required]
         public string Text { get; set; }
 
-        //public virtual List<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

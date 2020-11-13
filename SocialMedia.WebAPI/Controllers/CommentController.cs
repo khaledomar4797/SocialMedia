@@ -23,8 +23,15 @@ namespace SocialMedia.WebAPI.Controllers
         public IHttpActionResult Get()
         {
             CommentService commentService = CreateCommentService();
-            var posts = commentService.GetComments();
-            return Ok(posts);
+            var comments = commentService.GetComments();
+            return Ok(comments);
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            CommentService commentService = CreateCommentService();
+            var commentReplies = commentService.GetCommentReplies(id);
+            return Ok(commentReplies);
         }
 
         public IHttpActionResult Post(CommentCreate comment)
