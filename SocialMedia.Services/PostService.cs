@@ -1,6 +1,7 @@
 ﻿using SocialMedia.Data;
 using SocialMedia.Models;
 using SocialMedia.Models.Comment;
+using SocialMedia.Models.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,7 @@ namespace SocialMedia.Services
                                 {
                                     PostId = post.PostId,
                                     Title = post.Title,
+                                    Text = post.Text,
                                     TotalLikes = ctx.Likes.Where(like => like.PostId == post.PostId).Count(),
                                     IsLiked = (ctx.Likes.Where(like => like.PostId == post.PostId).Count() > 0) ? true : false,
 
@@ -84,6 +86,34 @@ namespace SocialMedia.Services
                         );
 
                 return query.ToArray();
+            }
+        }
+
+        public bool UpdatePost(PostEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Posts
+                    .Single(post => post.PostId == model.PostId && post.AuthorId == _userId);
+
+                entity.Title = model.Title;
+                entity.Text = model.Text;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeletePost(int postId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Posts.Single(post => post.PostId == postId && post.AuthorId == _userId);
+
+                ctx.Posts.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

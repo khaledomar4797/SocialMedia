@@ -11,7 +11,7 @@ namespace SocialMedia.Models
     {
         public int PostId { get; set; }
         public string Title { get; set; }
-
+        public string Text { get; set; }
         public bool IsLiked { get; set; }
         public int TotalLikes { get; set; }
 
