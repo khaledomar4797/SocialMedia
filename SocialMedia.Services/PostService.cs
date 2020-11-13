@@ -48,7 +48,13 @@ namespace SocialMedia.Services
                                 new PostListItem
                                 {
                                     PostId = e.PostId,
-                                    Title = e.Title
+                                    Title = e.Title,
+                                    Comments = e.Comments.Select(c => new CommentListItem
+                                    {
+                                        CommentId = c.CommentId,
+                                        Text = c.Text
+
+                                    }).ToList()
                                 }
                         );
 

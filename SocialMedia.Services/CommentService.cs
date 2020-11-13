@@ -48,7 +48,12 @@ namespace SocialMedia.Services
                                 new CommentListItem
                                 {
                                     CommentId = e.CommentId,
-                                    Text = e.Text
+                                    Text = e.Text,
+                                    Replies = e.Replies.Select(r => new ReplyListItem 
+                                    { 
+                                        ReplyId = r.ReplyId,
+                                        Text = r.Text
+                                    }).ToList()
                                 }
                         );
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialMedia.Models.Reply;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace SocialMedia.Models.Comment
     {
         public int CommentId { get; set; }
         public string Text { get; set; }
+
+        public virtual List<ReplyListItem> Replies { get; set; } = new List<ReplyListItem>();
     }
 }
