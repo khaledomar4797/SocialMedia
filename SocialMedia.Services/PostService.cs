@@ -42,21 +42,24 @@ namespace SocialMedia.Services
                 var query =
                     ctx
                         .Posts
-                        .Where(e => e.AuthorId == _userId)
+                        .Where(post => post.AuthorId == _userId)
                         .Select(
-                            e =>
+                            post =>
                                 new PostListItem
                                 {
-                                    PostId = e.PostId,
-                                    Title = e.Title,
-                                    Comments = e.Comments.Select(c => new CommentListItem
+                                    PostId = post.PostId,
+                                    Title = post.Title,
+                                    TotalLikes = ctx.Likes.Where(like => like.PostId == post.PostId).Count(),
+                                    IsLiked = (ctx.Likes.Where(like => like.PostId == post.PostId).Count() > 0) ? true : false,
+
+                                    Comments = post.Comments.Select(c => new CommentListItem
                                     {
                                         CommentId = c.CommentId,
                                         Text = c.Text
 
                                     }).ToList()
                                 }
-                        );
+                        ); ;
 
                 return query.ToArray();
             }
