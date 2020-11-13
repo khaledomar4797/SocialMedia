@@ -103,6 +103,10 @@
     <Compile Include="Migrations\202011131559549_Added-ReplySection.Designer.cs">
       <DependentUpon>202011131559549_Added-ReplySection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011131756036_Updated-LikeTable.cs" />
+    <Compile Include="Migrations\202011131756036_Updated-LikeTable.Designer.cs">
+      <DependentUpon>202011131756036_Updated-LikeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011131559549_Added-ReplySection.resx">
       <DependentUpon>202011131559549_Added-ReplySection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131756036_Updated-LikeTable.resx">
+      <DependentUpon>202011131756036_Updated-LikeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

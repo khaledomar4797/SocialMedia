@@ -26,7 +26,7 @@ namespace SocialMedia.Services
             var entity = new Like()
             {
                 Liker = _userId,
-                LikePost = post
+                PostId = model.PostId
             };
 
             using (var ctx = new ApplicationDbContext())

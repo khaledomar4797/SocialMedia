@@ -11,7 +11,6 @@ namespace SocialMedia.Models
     public class LikeCreate
     {
         [Required]
-        //public Post LikePost { get; set; }
         public int PostId { get; set; }
     }
 }
