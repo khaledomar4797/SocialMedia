@@ -21,6 +21,9 @@ namespace SocialMedia.Data
         [Required]
         public string Text { get; set; }
 
+        public bool IsLiked { get; set; }
+        public int TotalLikes { get; set; }
+
         public virtual List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
